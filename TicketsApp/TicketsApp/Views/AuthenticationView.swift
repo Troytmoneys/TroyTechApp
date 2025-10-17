@@ -33,7 +33,7 @@ struct AuthenticationView: View {
                 } onCompletion: { result in
                     switch result {
                     case .success(let auth):
-                        if case let .appleID(credential) = auth.credential,
+                        if let credential = auth.credential as? ASAuthorizationAppleIDCredential,
                            let tokenData = credential.identityToken,
                            let token = String(data: tokenData, encoding: .utf8) {
                             Task {

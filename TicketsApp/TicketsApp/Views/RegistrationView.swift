@@ -19,7 +19,7 @@ struct RegistrationView: View {
                         .textContentType(.username)
                     TextField("Email", text: $email)
                         .textContentType(.emailAddress)
-                        .keyboardType(.emailAddress)
+                        .emailKeyboard()
                     SecureField("Password", text: $password)
                         .textContentType(.newPassword)
                     SecureField("Confirm Password", text: $confirmPassword)
@@ -64,6 +64,20 @@ struct RegistrationView: View {
         }
     }
 }
+
+#if os(iOS)
+private extension View {
+    func emailKeyboard() -> some View {
+        keyboardType(.emailAddress)
+    }
+}
+#else
+private extension View {
+    func emailKeyboard() -> some View {
+        self
+    }
+}
+#endif
 
 #Preview {
     RegistrationView()
