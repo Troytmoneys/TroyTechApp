@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @Environment(\.dismiss) private var dismiss
+    @SwiftUI.Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var session: SessionController
 
     @State private var username = ""

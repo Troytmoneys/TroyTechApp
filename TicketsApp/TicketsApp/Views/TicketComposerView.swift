@@ -7,7 +7,7 @@ import AppKit
 #endif
 
 struct TicketComposerView: View {
-    @Environment(\.dismiss) private var dismiss
+    @SwiftUI.Environment(\.dismiss) private var dismiss
 
     @State private var title = ""
     @State private var detail = ""
@@ -116,5 +116,5 @@ struct TicketComposerView: View {
 }
 
 #Preview {
-    TicketComposerView(onCreate: { _ in nil })
+    TicketComposerView(onCreate: { _ in Optional<String>.none })
 }
