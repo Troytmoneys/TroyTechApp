@@ -1,6 +1,10 @@
 import SwiftUI
 import PhotosUI
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 struct TicketComposerView: View {
     @Environment(\.dismiss) private var dismiss
@@ -41,6 +45,7 @@ struct TicketComposerView: View {
                         Label(imageData == nil ? "Attach Screenshot" : "Change Screenshot", systemImage: "photo")
                     }
 
+                    #if canImport(UIKit)
                     if let data = imageData, let uiImage = UIImage(data: data) {
                         Image(uiImage: uiImage)
                             .resizable()
@@ -49,6 +54,16 @@ struct TicketComposerView: View {
                             .cornerRadius(12)
                             .padding(.vertical)
                     }
+                    #elseif canImport(AppKit)
+                    if let data = imageData, let nsImage = NSImage(data: data) {
+                        Image(nsImage: nsImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 180)
+                            .cornerRadius(12)
+                            .padding(.vertical)
+                    }
+                    #endif
                 }
             }
             .navigationTitle("New Ticket")

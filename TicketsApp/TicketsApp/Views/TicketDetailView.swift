@@ -52,7 +52,7 @@ struct TicketDetailView: View {
                 Button("Respond") {
                     showResponseSheet = true
                 }
-                .disabled(!session.profile.map { $0.role == .admin } ?? true)
+                .disabled(session.profile?.role != .admin)
             }
         }
         .sheet(isPresented: $showResponseSheet) {
@@ -80,7 +80,7 @@ struct TicketDetailView: View {
 }
 
 private struct ResponseComposerView: View {
-    @Environment(\.dismiss) private var dismiss
+    @SwiftUI.Environment(\.dismiss) private var dismiss
     @State private var message = ""
     var onSubmit: (String) async -> Void
 
